@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+
+    <title>NestJS MVC - IMC</title>
+</head>
+<body>
+    <h1>Calcular IMC</h1>
+    <form action="calcular-imc" method="post">
+        <input type="text" name="nome" placeholder="Nome...">
+        <input type="number" name="peso" placeholder="Peso(kg)">
+        <input type="number" step="0.01" name="altura" placeholder="Altura(m)">
+        <input type="submit" value="Calcular IMC">
+    </form>
+
+    {{#if imc}}
+        <h1>Seu IMC é {{imc}}.</h1>
+    {{/if}}
+
+    {{#if registros.length}}
+        <p>Registros de IMC: {{registros.length}}</p>
+
+        <table>
+            <tr>
+                <th>nome</th>
+                <th>imc</th>
+            </tr>
+            {{#each registros}}
+            <tr>
+                <td>{{nome}}</td>
+                <td>{{imc}}</td>
+            </tr>
+            {{/each}}
+        </table>
+    {{/if}}
+</body>
+</html>
