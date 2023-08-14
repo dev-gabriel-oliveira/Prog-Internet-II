@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Editar Produto</title>
+</head>
+<body>
+  <h1>Editar Produto</h1>
+  <form action="/products/{{product.id}}/update" method="PUT">
+    <label for="name">Nome:</label>
+    <input type="text" id="name" name="name" value="{{product.name}}" required>
+    <br>
+    <label for="available_status">Disponibilidade:</label>
+    <input type="checkbox" id="available_status" name="available_status" {{product.available_status ? 'checked' : ''}}>
+    <br>
+    <label for="destination">Destinação:</label>
+    <textarea id="destination" name="destination" required>{{product.destination}}</textarea>
+    <br>
+    <label for="profitability_rate">Taxa de Rentabilidade:</label>
+    <input type="number" id="profitability_rate" name="profitability_rate" value="{{product.profitability_rate}}" required min="1" max="20">
+    <br>
+    <label for="minimum_deadline">Prazo Mínimo:</label>
+    <input type="number" id="minimum_deadline" name="minimum_deadline" value="{{product.minimum_deadline}}" required min="0" max="48">
+    <br>
+    <label for="administration_rate">Taxa de Administração:</label>
+    <input type="number" id="administration_rate" name="administration_rate" value="{{product.administration_rate}}" required min="0" max="100">
+    <br>
+    <button type="submit">Salvar Alterações</button>
+  </form>
+  <a href="/products">Voltar para a Lista</a>
+</body>
+</html>

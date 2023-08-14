@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Excluir Produto</title>
+</head>
+<body>
+  <h1>Excluir Produto</h1>
+  <p>Você tem certeza de que deseja excluir o produto "{{product.name}}"?</p>
+  <form action="/products/{{product.id}}" method="DELETE">
+    <button type="submit">Excluir</button>
+  </form>
+  <a href="/products">Cancelar</a>
+</body>
+</html>

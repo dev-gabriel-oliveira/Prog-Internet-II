@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lista de Produtos</title>
+</head>
+<body>
+  <h1>Lista de Produtos</h1>
+  <a href="/products/create">Criar Novo Produto</a>
+  <ul>
+    {{#each products}}
+      <li>
+        <a href="/products/{{id}}">{{name}}</a>
+        <a href="/products/{{id}}/edit">Editar</a>
+        <a href="/products/{{id}}/delete">Excluir</a>
+      </li>
+    {{/each}}
+  </ul>
+</body>
+</html>
