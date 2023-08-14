@@ -11,20 +11,24 @@ export class AppController {
   getHome(): void {}
 
   // Get All
-  @Get('products')
+  @Get('/products')
   @Render('products')
-  async getAll() {
-    return this.appService.getAll();
+  getAll() {
+    const products = this.appService.getAll(); 
+    const context = { products }; 
+    return context;
   }
   // Get One
-  @Get('products/:id/detail')
+  @Get('/products/:id/detail')
   @Render('product-detail')
-  async getById(@Param('id') id: number): Promise<Product> {
-    return this.appService.getById(id);
+  getById(@Param('id') id: number) {
+    const product = this.appService.getById(id); 
+    const context = { product }; 
+    return product;
   }
 
   // Create Page
-  @Get('products/create')
+  @Get('/products/create')
   @Render('create-product')
   getCreateProductPage(): void {}
 
@@ -36,28 +40,28 @@ export class AppController {
   }
 
   // Update Page
-  @Get('products/:id/update') // Rota para página de edição
+  @Get('/products/:id/update') // Rota para página de edição
   @Render('update-product')
   async getUpdateProductPage(@Param('id') id: number): Promise<Product> {
     return this.appService.getById(id);
   }
 
   // Update Method
-  @Put('products/:id/update') // Rota para receber o formulário de edição
+  @Put('/products/:id/update') // Rota para receber o formulário de edição
   async update(@Param('id') id: number, @Body() product: Product): Promise<Product> {
     product.id = id;
     return this.appService.update(product);
   }
 
   // Delete Page
-  @Get('products/:id/delete') // Rota para página de exclusão
+  @Get('/products/:id/delete') // Rota para página de exclusão
   @Render('delete-product')
   async getDeleteProductPage(@Param('id') id: number): Promise<Product> {
     return this.appService.getById(id);
   }
 
   // Delete Method
-  @Delete('products/:id/delete') // Rota para receber a confirmação de exclusão
+  @Delete('/products/:id/delete') // Rota para receber a confirmação de exclusão
   async delete(@Param('id') id: number) {
     return this.appService.delete(id);
   }

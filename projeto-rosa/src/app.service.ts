@@ -6,8 +6,6 @@ export class AppService {
   private products: Product[] = [];
 
   getAll(): Product[] {
-    console.log('GET ALL - ', this.products);
-    
     return this.products;
   }
 
