@@ -7,9 +7,13 @@
   <h1>Lista de Produtos</h1>
   <a href="/products/create">Criar Novo Produto</a>
   <ul>
+    {{#if products}}
+      <p>Registros: {{products.length}}</p>
+    {{/if}}
+
     {{#each products}}
       <li>
-        <a href="/products/{{id}}">{{name}}</a>
+        <a href="/products/{{id}}/detail">{{name}}</a>
         <a href="/products/{{id}}/edit">Editar</a>
         <a href="/products/{{id}}/delete">Excluir</a>
       </li>

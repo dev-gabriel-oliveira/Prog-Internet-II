@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Render } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Render, Res } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Product } from './models';
 
@@ -10,46 +10,54 @@ export class AppController {
   @Render('index')
   getHome(): void {}
 
-  @Get('/products')
+  // Get All
+  @Get('products')
   @Render('products')
-  async getAll(): Promise<Product[]> {
+  async getAll() {
     return this.appService.getAll();
   }
-
-  @Get('/products/create') // Rota para página de criação
-  @Render('create-product')
-  getCreateProductPage(): void {} // Esse método não precisa retornar nada, apenas renderiza a página
-
-  @Post('/products/create') // Rota para receber o formulário de criação
-  async create(@Body() product: Product): Promise<Product> {
-    return this.appService.create(product);
-  }
-
-  @Get('/products/:id')
+  // Get One
+  @Get('products/:id/detail')
   @Render('product-detail')
   async getById(@Param('id') id: number): Promise<Product> {
     return this.appService.getById(id);
   }
 
-  @Get('/products/:id/edit') // Rota para página de edição
+  // Create Page
+  @Get('products/create')
+  @Render('create-product')
+  getCreateProductPage(): void {}
+
+  // Create Method
+  @Post('/products/create')
+  async create(@Res() res: any, @Body() product: Product): Promise<Product> {
+    await res.redirect(`/products`);
+    return this.appService.create(product);
+  }
+
+  // Update Page
+  @Get('products/:id/update') // Rota para página de edição
   @Render('update-product')
   async getUpdateProductPage(@Param('id') id: number): Promise<Product> {
     return this.appService.getById(id);
   }
 
-  @Put('/products/:id/update') // Rota para receber o formulário de edição
+  // Update Method
+  @Put('products/:id/update') // Rota para receber o formulário de edição
   async update(@Param('id') id: number, @Body() product: Product): Promise<Product> {
     product.id = id;
     return this.appService.update(product);
   }
 
-  @Get('/products/:id/delete') // Rota para página de exclusão
+  // Delete Page
+  @Get('products/:id/delete') // Rota para página de exclusão
   @Render('delete-product')
   async getDeleteProductPage(@Param('id') id: number): Promise<Product> {
     return this.appService.getById(id);
   }
 
-  @Delete('/products/:id/delete') // Rota para receber a confirmação de exclusão
+  // Delete Method
+  @Delete('products/:id/delete') // Rota para receber a confirmação de exclusão
   async delete(@Param('id') id: number) {
     return this.appService.delete(id);
   }

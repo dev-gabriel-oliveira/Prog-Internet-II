@@ -3,23 +3,29 @@ import { Product } from './models';
 
 @Injectable()
 export class AppService {
-  products: Product[] = [];
+  private products: Product[] = [];
 
-  getAll() {
+  getAll(): Product[] {
+    console.log('GET ALL - ', this.products);
+    
     return this.products;
   }
 
-  getById(id: number) {
+  getById(id: number): Product {
     const product = this.products.find((value) => (value.id = id));
+
+    console.log(product, ` - id ${id}`);
+    
     return product;
   }
 
   create(product: Product) {
-    let lastId = this.products.length;
+    let lastId = this.products.length > 0 ? this.products.length : 0;
 
     product.id = lastId + 1;
     this.products.push(product);
-
+    console.log('CREATE - ',this.products);
+    
     return product;
   }
 
