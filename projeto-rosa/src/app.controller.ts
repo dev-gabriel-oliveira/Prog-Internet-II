@@ -18,12 +18,13 @@ export class AppController {
     const context = { products }; 
     return context;
   }
+
   // Get One
   @Get('/products/:id/detail')
-  @Render('product-detail')
+  @Render('detail-product')
   getById(@Param('id') id: number) {
     const product = this.appService.getById(id); 
-    const context = { product }; 
+
     return product;
   }
 
@@ -34,27 +35,32 @@ export class AppController {
 
   // Create Method
   @Post('/products/create')
-  async create(@Res() res: any, @Body() product: Product): Promise<Product> {
-    await res.redirect(`/products`);
-    return this.appService.create(product);
+  create(@Res() res: any, @Body() product: Product) {
+    this.appService.create(product);
+    return res.redirect(`/products`);
   }
+
 
   // Update Page
   @Get('/products/:id/update') // Rota para página de edição
   @Render('update-product')
-  async getUpdateProductPage(@Param('id') id: number): Promise<Product> {
-    return this.appService.getById(id);
+  async getUpdateProductPage(@Param('id') id: number) {
+    const product = this.appService.getById(id); 
+
+    return product;
   }
 
   // Update Method
   @Put('/products/:id/update') // Rota para receber o formulário de edição
-  async update(@Param('id') id: number, @Body() product: Product): Promise<Product> {
+  async update(@Res() res: any, @Param('id') id: number, @Body() product: Product) {
     product.id = id;
-    return this.appService.update(product);
+    this.appService.update(product);
+    return res.redirect(`/products`);
   }
 
+
   // Delete Page
-  @Get('/products/:id/delete') // Rota para página de exclusão
+  /*@Get('/products/:id/delete') // Rota para página de exclusão
   @Render('delete-product')
   async getDeleteProductPage(@Param('id') id: number): Promise<Product> {
     return this.appService.getById(id);
@@ -64,5 +70,5 @@ export class AppController {
   @Delete('/products/:id/delete') // Rota para receber a confirmação de exclusão
   async delete(@Param('id') id: number) {
     return this.appService.delete(id);
-  }
+  }*/
 }

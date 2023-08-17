@@ -6,13 +6,15 @@ export class AppService {
   private products: Product[] = [];
 
   getAll(): Product[] {
+    console.log('GET ALL... \n', this.products, '\n');
+    
     return this.products;
   }
 
   getById(id: number): Product {
-    const product = this.products.find((value) => (value.id = id));
+    const product = this.products.find((value) => value.id == id);
 
-    console.log(product, ` - id ${id}`);
+    console.log('GET ONE... \n', product, '\n');
     
     return product;
   }
@@ -21,15 +23,20 @@ export class AppService {
     let lastId = this.products.length > 0 ? this.products.length : 0;
 
     product.id = lastId + 1;
+    product.available_status ? true : false;
+
     this.products.push(product);
-    console.log('CREATE - ',this.products);
+    console.log('CREATE... \n', product, '\n');
     
     return product;
   }
 
   update(product: Product) {
+    console.log('UPDATE... \n', product, '\n');
     const productArray = this.getById(product.id);
 
+    
+    
     if (productArray) {
       productArray.id = product.id;
       productArray.name = product.name;
@@ -43,8 +50,8 @@ export class AppService {
     return productArray;
   }
 
-  delete(id: number) {
+  /*delete(id: number) {
     const index = this.products.findIndex((value) => value.id == id);
     this.products.splice(index, 1);
-  }
+  }*/
 }
