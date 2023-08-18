@@ -1,0 +1,38 @@
+{{#> base}}
+    {{#*inline 'title'}}Produtos{{/inline}}
+
+    {{#*inline 'mainContent'}}
+        <h1>Lista de Produtos</h1>
+
+        <a href="/products/create">
+          <button class="btn btn-primary">Novo Produto</button>
+        </a>
+        
+        <hr/>
+        {{#if products}}
+          <p>Registros: {{products.length}}</p>
+          <hr/>
+        {{/if}}
+        
+        <table class="table table-bordered">
+            <tr>
+                <th>id</th>
+                <th>nome</th>
+                <th>status</th>
+                <th>--</th>
+                <th>--</th>
+                <th>--</th>
+            </tr>
+            {{#each products}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{name}}</td>
+                <td>{{available_status}}</td>
+                <td><a href="/products/{{id}}/detail">Detalhes</a></td>
+                <td><a href="/products/{{id}}/update">Editar</a></td>
+                <td><a href="/products/{{id}}/delete">Excluir</a></td>
+            </tr>
+            {{/each}}
+        </table>
+    {{/inline}}
+{{/base}}

@@ -34,8 +34,6 @@ export class AppService {
   update(product: Product) {
     console.log('UPDATE... \n', product, '\n');
     const productArray = this.getById(product.id);
-
-    
     
     if (productArray) {
       productArray.id = product.id;
@@ -50,8 +48,8 @@ export class AppService {
     return productArray;
   }
 
-  /*delete(id: number) {
+  delete(id: number) {
     const index = this.products.findIndex((value) => value.id == id);
     this.products.splice(index, 1);
-  }*/
+  }
 }

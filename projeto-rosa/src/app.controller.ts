@@ -12,7 +12,7 @@ export class AppController {
 
   // Get All
   @Get('/products')
-  @Render('products')
+  @Render('list-product')
   getAll() {
     const products = this.appService.getAll(); 
     const context = { products }; 
@@ -44,7 +44,7 @@ export class AppController {
   // Update Page
   @Get('/products/:id/update') // Rota para página de edição
   @Render('update-product')
-  async getUpdateProductPage(@Param('id') id: number) {
+  getUpdateProductPage(@Param('id') id: number) {
     const product = this.appService.getById(id); 
 
     return product;
@@ -52,7 +52,7 @@ export class AppController {
 
   // Update Method
   @Put('/products/:id/update') // Rota para receber o formulário de edição
-  async update(@Res() res: any, @Param('id') id: number, @Body() product: Product) {
+  update(@Res() res: any, @Param('id') id: number, @Body() product: Product) {
     product.id = id;
     this.appService.update(product);
     return res.redirect(`/products`);
@@ -60,15 +60,15 @@ export class AppController {
 
 
   // Delete Page
-  /*@Get('/products/:id/delete') // Rota para página de exclusão
+  @Get('/products/:id/delete') // Rota para página de exclusão
   @Render('delete-product')
-  async getDeleteProductPage(@Param('id') id: number): Promise<Product> {
+  async getDeleteProductPage(@Param('id') id: number) {
     return this.appService.getById(id);
   }
 
   // Delete Method
   @Delete('/products/:id/delete') // Rota para receber a confirmação de exclusão
-  async delete(@Param('id') id: number) {
+  delete(@Param('id') id: number) {
     return this.appService.delete(id);
-  }*/
+  }
 }
