@@ -1,0 +1,61 @@
+{{#> base}}
+    {{#*inline 'mainContent'}}
+      <h1>Novo Produto</h1>
+
+      <hr>
+
+      <form class="row g-3" action="/products/create" method="POST">
+        <div class="col-md-6 mb-3">
+          <label class="form-label" for="name">Nome:</label>
+          <input class="form-control" type="text" id="name" name="name" required>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label" for="destination">Destinação:</label>
+          <textarea class="form-control" id="destination" name="destination" required></textarea>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label" for="profitability_rate">Taxa de Rentabilidade:</label>
+          <input class="form-control" type="number" id="profitability_rate" name="profitability_rate" required min="1" max="20">
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label" for="minimum_deadline">Prazo Mínimo:</label>
+          <input class="form-control" type="number" id="minimum_deadline" name="minimum_deadline" required min="0" max="48">
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label" for="administration_rate">Taxa de Administração:</label>
+          <input class="form-control" type="number" id="administration_rate" name="administration_rate" required min="0" max="100">
+        </div>
+
+        <div class="col-md-6 border-start mb-3">
+          <label class="form-label" for="available_status">Disponibilidade:</label>
+          <div class="d-flex">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="available_status" value="Disponível" ="available_status1" checked>
+              <label class="form-check-label" for="available_status1">
+                Disponível
+              </label>
+            </div>
+            <div class="form-check mx-5">
+              <input class="form-check-input" type="radio" name="available_status" value="Não Disponível" id="available_status2">
+              <label class="form-check-label" for="available_status2">
+                Não Disponível
+              </label>
+            </div>
+          </div>
+          
+        </div>
+
+        <div class="col-12">
+          <button type="submit" class="btn btn-success">Criar Produto</button>
+        </div>
+      </form>
+
+      <hr>
+      
+      <a href="/list-products">Voltar para a Lista</a>
+    {{/inline}}
+{{/base}}

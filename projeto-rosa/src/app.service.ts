@@ -4,48 +4,35 @@ import { Product } from './models';
 @Injectable()
 export class AppService {
   private products: Product[] = [];
+  private nextId = 1; // ID Auto-Incrementável
 
   getAll(): Product[] {
-    console.log('GET ALL... \n', this.products, '\n');
-    
+    //console.log('GET ALL... \n', this.products, '\n');
     return this.products;
   }
 
   getById(id: number): Product {
     const product = this.products.find((value) => value.id == id);
-
-    console.log('GET ONE... \n', product, '\n');
-    
     return product;
   }
 
   create(product: Product) {
-    let lastId = this.products.length > 0 ? this.products.length : 0;
-
-    product.id = lastId + 1;
-    product.available_status ? true : false;
+    product.id = this.nextId++;
+    product.profitability_rate = Number(product.profitability_rate); // Converte string para number
+    product.minimum_deadline = Number(product.minimum_deadline); // Converte string para number
+    product.administration_rate = Number(product.administration_rate); // Converte string para number
 
     this.products.push(product);
-    console.log('CREATE... \n', product, '\n');
     
     return product;
   }
 
-  update(product: Product) {
-    console.log('UPDATE... \n', product, '\n');
-    const productArray = this.getById(product.id);
-    
-    if (productArray) {
-      productArray.id = product.id;
-      productArray.name = product.name;
-      productArray.available_status = product.available_status;
-      productArray.destination = product.destination;
-      productArray.profitability_rate = product.profitability_rate;
-      productArray.minimum_deadline = product.minimum_deadline;
-      productArray.administration_rate = product.administration_rate;
-    }
+  update(id: number) {
+    const product = this.getById(id);
 
-    return productArray;
+    product.available_status = product.available_status == "Disponível" ? "Não Disponível" : "Disponível"; // Muda Status
+
+    return product;
   }
 
   delete(id: number) {

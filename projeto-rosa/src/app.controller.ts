@@ -11,8 +11,8 @@ export class AppController {
   getHome(): void {}
 
   // Get All
-  @Get('/products')
-  @Render('list-product')
+  @Get('/list-products')
+  @Render('products/list-products')
   getAll() {
     const products = this.appService.getAll(); 
     const context = { products }; 
@@ -20,55 +20,55 @@ export class AppController {
   }
 
   // Get One
-  @Get('/products/:id/detail')
-  @Render('detail-product')
+  @Get('/detail-product-:id')
+  @Render('products/detail-product')
   getById(@Param('id') id: number) {
-    const product = this.appService.getById(id); 
-
+    const product = this.appService.getById(id);
     return product;
   }
 
   // Create Page
-  @Get('/products/create')
-  @Render('create-product')
+  @Get('/create-product')
+  @Render('products/create-product')
   getCreateProductPage(): void {}
 
   // Create Method
   @Post('/products/create')
   create(@Res() res: any, @Body() product: Product) {
     this.appService.create(product);
-    return res.redirect(`/products`);
+    return res.redirect(`/list-products`);
   }
 
 
   // Update Page
-  @Get('/products/:id/update') // Rota para página de edição
+  /*@Get('/update-product-:id') // Rota para página de edição
   @Render('update-product')
   getUpdateProductPage(@Param('id') id: number) {
     const product = this.appService.getById(id); 
 
     return product;
-  }
+  }*/
 
   // Update Method
-  @Put('/products/:id/update') // Rota para receber o formulário de edição
-  update(@Res() res: any, @Param('id') id: number, @Body() product: Product) {
-    product.id = id;
-    this.appService.update(product);
-    return res.redirect(`/products`);
+  @Get('/products/:id/update') // Rota para receber o formulário de edição
+  update(@Res() res: any, @Param('id') id: number) {
+    this.appService.update(id);
+    return res.redirect(`/list-products`);
   }
 
 
   // Delete Page
-  @Get('/products/:id/delete') // Rota para página de exclusão
-  @Render('delete-product')
+  @Get('/delete-product-:id') // Rota para página de exclusão
+  @Render('products/delete-product')
   async getDeleteProductPage(@Param('id') id: number) {
-    return this.appService.getById(id);
+    const product = this.appService.getById(id);
+    return product;
   }
 
   // Delete Method
-  @Delete('/products/:id/delete') // Rota para receber a confirmação de exclusão
-  delete(@Param('id') id: number) {
-    return this.appService.delete(id);
+  @Get('/products/:id/delete') // Rota para receber a confirmação de exclusão
+  delete(@Res() res: any, @Param('id') id: number) {
+    this.appService.delete(id);
+    return res.redirect(`/list-products`);
   }
 }

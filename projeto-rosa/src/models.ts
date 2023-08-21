@@ -1,7 +1,7 @@
 export class Product {
   id: number;
   name: string;
-  available_status: boolean;
+  available_status: string;
   destination: string;
   profitability_rate: number;
   minimum_deadline: number;

@@ -1,12 +1,37 @@
 {{#> base}}
-    {{#*inline 'title'}}Projeto Rosa{{/inline}}
-
     {{#*inline 'mainContent'}}
-        <h1>Hello World!</h1>
+        <h1>Olá, Investidor!</h1>
+        <h5>Seja bem vindo ao Rosa Invest.</h5>
 
-        <p>Olá seja bem vindo ao Projeto Rosa.</p>
+        <div class="row justify-content-start my-5">
+            <div class="col-auto card py-4 me-5">
+                <h2>Aqui temos</h2>
+                <a href="">
+                    <h1 class="text-success">CDB 130%</h1>
+                </a>
+                <h2>para você!</h2>
+            </div>
 
-        <p>Ir para Lista de Produtos</p>
-        <a href="/products">Lista de Produtos</a>
+            <div class="col-auto card py-4 me-5">
+                <h2>Conheça nossos</h2>
+                <a href="/list-products">
+                    <h1 class="text-primary">Produtos</h1>
+                </a>
+                <h2>de alto rendimento.</h3>
+            </div>
+
+            <div class="col-auto card py-4 me-5">
+                <h2>Veja nossas</h2>
+                <a href="">
+                    <h1 class="text-info">Plataformas</h1>
+                </a>
+                <h2>baseadas no seu perfil.</h4>
+            </div>
+        </div>
+
+        <hr>
+
+        <h5>Comece por aqui</h5>
+        <a href="/list-products"><strong>Lista de Produtos</strong></a>
     {{/inline}}
 {{/base}}

@@ -1,0 +1,16 @@
+{{#> base}}
+    {{#*inline 'mainContent'}}
+      <h1>Excluir Produto</h1>
+
+      <hr>
+      
+      <p>Você tem certeza de que deseja excluir o produto "{{name}}"?</p>
+      <a href="/products/{{id}}/delete">
+        <button type="button" class="btn btn-danger">Excluir</button>
+      </a>
+
+      <hr>
+      
+      <a href="/list-products">Cancelar</a>
+    {{/inline}}
+{{/base}}
